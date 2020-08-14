@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import Character from './components/Character'
 import axios from 'axios'
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components'
 
 const WrapperDiv =styled.div`
 font-family: sans-serif;
@@ -13,11 +13,22 @@ font-size:1.5rem;
 list-style: none;
 background: url("https://i.pinimg.com/originals/d9/4f/39/d94f397d1fbebd2212a9b83415d7e550.jpg") no-repeat center/cover;
 `
-
+const kf = keyframes`
+100%{
+  opacity:1;
+  color:limegreen;
+}
+`
 const Header = styled.h1`
+opacity:0;
 color:white;
 font-size: 3rem;
 text-shadow: 2px 1px black;
+animation:  ${kf} 3s ease-in-out forwards;
+transition: transform 2s ease;
+&:hover {
+  transform: scale(1.2);
+}
 `
 
 const Flexbox = styled.div`
@@ -27,6 +38,10 @@ justify-content: space-around;
 padding-bottom: 14rem;
 width: 80%;
 margin: 0 auto;
+transition: transform 2s ease-in;
+&:hover {
+    transform: rotate(360deg)
+  }
 `
 
 const App = () => {
@@ -44,7 +59,6 @@ const [characters, setCharacters] = useState([])
       console.log("error")
     })
   },[])
-
 
   return (
     <WrapperDiv>
